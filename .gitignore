@@ -1,0 +1,21 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# ML models
+*.pkl
+*.joblib
+
+dyscalculia_v9_pkl/
+attention_simple_models_output/
+memory_simple_models_output/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
