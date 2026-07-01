@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__)
 CORS(app)
-# ================= PERFORMANCE LOGGING =================
+
 
 @app.before_request
 def start_timer():
@@ -35,12 +35,7 @@ def log_request_time(response):
         print(f"{request.path} loaded in {duration:.4f} seconds")
     return response
 
-# ==========================================================
-# ================= LOAD ML MODELS =========================
-# ==========================================================
-# ==========================================================
-# ================= LOAD NEW DYSCALCULIA MODEL (V9) =======
-# ==========================================================
+
 
 DYS_DIR = os.path.join(BASE_DIR, "dyscalculia_v9_pkl")
 
@@ -51,12 +46,7 @@ dys_model = joblib.load(os.path.join(DYS_DIR, "best_model.pkl"))
 
 print(" New Dyscalculia v9 model loaded")
 
-# ==========================================================
-# ================= LOAD ATTENTION MODEL ===================
-# ==========================================================
-# ==========================================================
-# ================= LOAD NEW ATTENTION MODEL ===============
-# ==========================================================
+
 
 ATT_DIR = os.path.join(BASE_DIR, "attention_simple_models_output")
 
@@ -70,13 +60,7 @@ print(" New Attention model loaded")
 
 
 
-# ==========================================================
-# ================= LOAD MEMORY MODEL ======================
-# ==========================================================
 
-# ==========================================================
-# ================= LOAD NEW MEMORY MODEL ==================
-# ==========================================================
 
 MEM_DIR = os.path.join(BASE_DIR, "memory_simple_models_output")
 
@@ -87,9 +71,7 @@ mem_raw_features = joblib.load(os.path.join(MEM_DIR, "raw_features.pkl"))
 
 print(" New Memory model loaded")
 
-# ==========================================================
-# ================= PASSWORD ===============================
-# ==========================================================
+
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
@@ -105,9 +87,7 @@ def is_valid_password(password):
 def is_valid_email(email):
     return re.match(r"^[a-zA-Z0-9._%+-]+@gmail\.com$", email)
 
-# ==========================================================
-# ================= USERNAME HELPERS =======================
-# ==========================================================
+
 
 def suggest_usernames(base, cursor):
     suggestions = []
@@ -132,9 +112,6 @@ def suggest_child_names(base, cursor, adult_id):
             suggestions.append(new_name)
     return suggestions
 
-# ==========================================================
-# ================= SIGNUP ================================
-# ==========================================================
 
 @app.route("/signup", methods=["POST"])
 def signup():
@@ -176,9 +153,7 @@ def signup():
 
     return jsonify({"message": "Signup successful"}), 201
 
-# ==========================================================
-# ================= LOGIN =================================
-# ==========================================================
+
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -243,9 +218,7 @@ def reset_password():
     return jsonify({"message": "Password updated successfully"}), 200
 
 
-# ==========================================================
-# ================= ADD CHILD ==============================
-# ==========================================================
+
 
 @app.route("/add-child", methods=["POST"])
 def add_child():
@@ -289,9 +262,7 @@ def add_child():
 
     return jsonify({"message": "Child added"}), 201
 
-# ==========================================================
-# ================= CHILD LIST =============================
-# ==========================================================
+
 
 @app.route("/children/<path:parent_email>", methods=["GET"])
 def get_children(parent_email):
@@ -463,15 +434,7 @@ def save_activity():
     conn.close()
     return jsonify({"message": "Saved"}), 200
 
-# ==========================================================
-# ================= BUILD ML FEATURES ======================
-# ==========================================================
 
-
-
-# ==========================================================
-# ================= DYS CALCULIA ML ========================
-# ==========================================================
 
 def ml_model_dyscalculia(activity_rows):
 
@@ -510,13 +473,6 @@ def ml_model_dyscalculia(activity_rows):
     }
 
     return label_map.get(label, label)
-# ==========================================================
-# ================= ATTENTION ML ===========================
-# ==========================================================
-
-# ==========================================================
-# ================= NEW ATTENTION ML =======================
-# ==========================================================
 
 def ml_model_attention(activity_rows):
 
@@ -554,13 +510,7 @@ def ml_model_attention(activity_rows):
     }
 
     return label_map.get(label, label)
-# ==========================================================
-# ================= MEMORY ML ==============================
-# ==========================================================
 
-# ==========================================================
-# ================= NEW MEMORY ML ==========================
-# ==========================================================
 
 def ml_model_memory(activity_rows):
 
@@ -604,9 +554,7 @@ def ml_model_memory(activity_rows):
     
     
 
-# ==========================================================
-# ================= VIEW REPORT ============================
-# ==========================================================
+
 
 @app.route("/view-report/<child_name>", methods=["GET"])
 def view_report(child_name):
@@ -658,9 +606,6 @@ ORDER BY activity_id
         "memory_result":memory_result
     }),200
 
-# ==========================================================
-# ================= TEST ===================================
-# ==========================================================
 
 @app.route("/")
 def home():
