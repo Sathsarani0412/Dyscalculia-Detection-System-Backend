@@ -14,7 +14,7 @@ def create_tables():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # ---------------- RESPONSIBLE ADULT ----------------
+ 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS responsible_adult (
             adult_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,7 +26,7 @@ def create_tables():
         )
     """)
 
-    # ---------------- CHILD ----------------
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS child (
             child_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,7 +44,7 @@ def create_tables():
         )
     """)
 
-    # ---------------- ACTIVITY RESULTS ----------------
+ 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS activity_results (
             result_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -63,7 +63,6 @@ def create_tables():
         )
     """)
 
-    # ---------------- FINAL REPORT ----------------
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS final_report (
             report_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -82,7 +81,7 @@ def create_tables():
         )
     """)
 
-    # ---------------- ML MODEL ----------------
+    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ml_model (
             model_id TEXT PRIMARY KEY,
@@ -90,7 +89,6 @@ def create_tables():
         )
     """)
 
-    # ---------------- ML PREDICTION RESULT ----------------
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ml_prediction_result (
             prediction_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -110,7 +108,7 @@ def create_tables():
         )
     """)
 
-    # ---------------- INSERT DUMMY ML MODEL ----------------
+    
     cursor.execute("""
         INSERT OR IGNORE INTO ml_model (model_id, model_name)
         VALUES ('ML1', 'ActivityAnalysisModel')
